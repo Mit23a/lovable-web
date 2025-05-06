@@ -28,7 +28,7 @@ const OTPVerification = () => {
     
     toast({
       title: "OTP Verified",
-      description: "OTP verification successful. In a real app, you would be logged in now.",
+      description: "OTP verification successful. In a real app, you would be redirected to reset your password.",
     });
     
     // Navigate to dashboard or home after successful verification

@@ -3,13 +3,14 @@ import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { useToast } from '@/components/ui/use-toast';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import WinterLandscape from '@/components/WinterLandscape';
 
 const ForgotPassword = () => {
   const [email, setEmail] = useState('');
   const [submitted, setSubmitted] = useState(false);
   const { toast } = useToast();
+  const navigate = useNavigate();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -24,13 +25,19 @@ const ForgotPassword = () => {
       return;
     }
     
-    // Here you would typically handle password reset
+    // Instead of just showing a success message, we'll briefly show 
+    // the success UI and then navigate to OTP verification
     toast({
-      title: "Reset Link Sent",
-      description: "If an account exists, a password reset link will be sent.",
+      title: "OTP Sent",
+      description: "A verification code has been sent to your email.",
     });
     
     setSubmitted(true);
+    
+    // Navigate to OTP verification after a short delay
+    setTimeout(() => {
+      navigate('/otp-verification', { state: { email } });
+    }, 1500);
   };
 
   return (
@@ -42,7 +49,7 @@ const ForgotPassword = () => {
             <>
               <div className="text-center mb-8">
                 <h1 className="text-3xl font-bold tracking-tight">FORGOT PASSWORD</h1>
-                <p className="text-gray-500 mt-2">Enter your email to receive a reset link</p>
+                <p className="text-gray-500 mt-2">Enter your email to receive a verification code</p>
               </div>
               
               <form onSubmit={handleSubmit}>
@@ -65,7 +72,7 @@ const ForgotPassword = () => {
                     type="submit" 
                     className="w-full bg-purple-600 hover:bg-purple-700 text-white"
                   >
-                    Send Reset Link
+                    Send Verification Code
                   </Button>
                 </div>
               </form>
@@ -86,16 +93,10 @@ const ForgotPassword = () => {
               </svg>
               <h2 className="text-2xl font-bold mb-2">Check Your Email</h2>
               <p className="text-gray-500 mb-6">
-                We've sent a password reset link to {email}
+                We've sent a verification code to {email}
               </p>
               <p className="text-sm text-gray-500">
-                Didn't receive an email? Check your spam folder or 
-                <button 
-                  className="text-purple-600 hover:text-purple-500 ml-1"
-                  onClick={() => setSubmitted(false)}
-                >
-                  try again
-                </button>
+                Redirecting to verification screen...
               </p>
             </div>
           )}
