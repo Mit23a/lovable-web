@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Checkbox } from '@/components/ui/checkbox';
 import { useToast } from '@/components/ui/use-toast';
-import { Google } from 'lucide-react';
+import { LogIn } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const LoginForm = () => {
@@ -114,7 +114,7 @@ const LoginForm = () => {
           onClick={handleGoogleLogin} 
           className="w-full border border-gray-300"
         >
-          <Google className="h-5 w-5 mr-2" />
+          <LogIn className="h-5 w-5 mr-2" />
           Sign in with Google
         </Button>
       </div>

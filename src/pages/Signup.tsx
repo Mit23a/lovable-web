@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { useToast } from '@/components/ui/use-toast';
-import { Google } from 'lucide-react';
+import { LogIn } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import WinterLandscape from '@/components/WinterLandscape';
 
@@ -118,7 +118,7 @@ const Signup = () => {
               onClick={handleGoogleSignup} 
               className="w-full border border-gray-300"
             >
-              <Google className="h-5 w-5 mr-2" />
+              <LogIn className="h-5 w-5 mr-2" />
               Sign up with Google
             </Button>
           </div>
