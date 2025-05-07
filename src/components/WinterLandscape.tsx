@@ -61,28 +61,71 @@ const WinterLandscape = () => {
         ))}
       </div>
       
-      {/* Snow ground */}
-      <div className="absolute bottom-0 w-full h-32 bg-white bg-opacity-30 rounded-t-full"></div>
-      
-      {/* Snowman */}
-      <div className="absolute bottom-8 left-1/3 transform -translate-x-1/2">
-        {/* Bottom snowball */}
-        <div className="w-24 h-24 bg-white rounded-full opacity-90 mx-auto"></div>
-        {/* Middle snowball */}
-        <div className="w-18 h-18 bg-white rounded-full opacity-90 mx-auto -mt-4"></div>
-        {/* Head */}
-        <div className="w-14 h-14 bg-white rounded-full opacity-90 mx-auto -mt-3 relative">
-          {/* Eyes */}
-          <div className="absolute w-2 h-2 bg-black rounded-full top-4 left-4"></div>
-          <div className="absolute w-2 h-2 bg-black rounded-full top-4 right-4"></div>
-          {/* Carrot nose */}
-          <div className="absolute w-6 h-2 bg-orange-500 rounded-full top-6 left-4 transform rotate-0"></div>
-          {/* Smile */}
-          <div className="absolute w-8 h-1 bg-black rounded-full top-9 left-3 transform rotate-12"></div>
+      {/* Enhanced snowy landscape at the bottom */}
+      <div className="absolute bottom-0 w-full">
+        {/* Main snow hill with gradient */}
+        <div className="absolute bottom-0 w-full h-40 bg-gradient-to-t from-white to-purple-100 rounded-t-[100%]"></div>
+        
+        {/* Secondary snow hills for depth */}
+        <div className="absolute bottom-0 left-1/4 w-2/3 h-28 bg-gradient-to-t from-white to-purple-100 rounded-t-[100%] opacity-70"></div>
+        <div className="absolute bottom-0 left-1/2 w-1/3 h-32 bg-gradient-to-t from-white to-purple-100 rounded-t-[100%] opacity-80"></div>
+        
+        {/* Distant mountain silhouettes */}
+        <div className="absolute bottom-10 left-5 w-40 h-60 bg-purple-900 rounded-t-[70%] opacity-50 transform -rotate-2"></div>
+        <div className="absolute bottom-10 right-10 w-48 h-72 bg-indigo-900 rounded-t-[60%] opacity-40"></div>
+        
+        {/* Snow-covered pine trees */}
+        <div className="absolute bottom-20 left-1/4 flex space-x-8">
+          {/* Pine tree 1 */}
+          <div className="relative w-16 flex flex-col items-center">
+            <div className="w-14 h-14 bg-purple-900 clip-path-triangle mb-1 relative">
+              <div className="absolute top-0 left-0 right-0 h-4 bg-white rounded-t-lg opacity-80"></div>
+            </div>
+            <div className="w-16 h-16 bg-purple-900 clip-path-triangle mb-1 relative">
+              <div className="absolute top-0 left-0 right-0 h-4 bg-white rounded-t-lg opacity-80"></div>
+            </div>
+            <div className="w-18 h-18 bg-purple-900 clip-path-triangle relative">
+              <div className="absolute top-0 left-0 right-0 h-5 bg-white rounded-t-lg opacity-80"></div>
+            </div>
+            <div className="w-3 h-6 bg-purple-950 rounded-sm"></div>
+          </div>
+          
+          {/* Pine tree 2 */}
+          <div className="relative w-14 flex flex-col items-center mt-4">
+            <div className="w-12 h-12 bg-purple-900 clip-path-triangle mb-1 relative">
+              <div className="absolute top-0 left-0 right-0 h-3 bg-white rounded-t-lg opacity-80"></div>
+            </div>
+            <div className="w-14 h-14 bg-purple-900 clip-path-triangle mb-1 relative">
+              <div className="absolute top-0 left-0 right-0 h-4 bg-white rounded-t-lg opacity-80"></div>
+            </div>
+            <div className="w-2 h-5 bg-purple-950 rounded-sm"></div>
+          </div>
         </div>
-        {/* Arms */}
-        <div className="absolute w-16 h-1 bg-brown-900 top-24 -left-10 transform rotate-45"></div>
-        <div className="absolute w-16 h-1 bg-brown-900 top-24 -right-10 transform -rotate-45"></div>
+        
+        {/* Snow-covered pine trees on the right */}
+        <div className="absolute bottom-16 right-1/4 flex space-x-6">
+          {/* Pine tree 3 */}
+          <div className="relative w-12 flex flex-col items-center">
+            <div className="w-10 h-10 bg-purple-900 clip-path-triangle mb-1 relative">
+              <div className="absolute top-0 left-0 right-0 h-3 bg-white rounded-t-lg opacity-80"></div>
+            </div>
+            <div className="w-12 h-12 bg-purple-900 clip-path-triangle mb-1 relative">
+              <div className="absolute top-0 left-0 right-0 h-3 bg-white rounded-t-lg opacity-80"></div>
+            </div>
+            <div className="w-2 h-4 bg-purple-950 rounded-sm"></div>
+          </div>
+          
+          {/* Pine tree 4 */}
+          <div className="relative w-16 flex flex-col items-center mt-2">
+            <div className="w-14 h-14 bg-purple-900 clip-path-triangle mb-1 relative">
+              <div className="absolute top-0 left-0 right-0 h-4 bg-white rounded-t-lg opacity-80"></div>
+            </div>
+            <div className="w-16 h-16 bg-purple-900 clip-path-triangle mb-1 relative">
+              <div className="absolute top-0 left-0 right-0 h-4 bg-white rounded-t-lg opacity-80"></div>
+            </div>
+            <div className="w-3 h-6 bg-purple-950 rounded-sm"></div>
+          </div>
+        </div>
       </div>
 
       {/* Custom CSS for animations */}
@@ -117,6 +160,10 @@ const WinterLandscape = () => {
           
           .animate-twinkle {
             animation: twinkle 3s ease-in-out infinite;
+          }
+          
+          .clip-path-triangle {
+            clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
           }
         `}
       </style>
