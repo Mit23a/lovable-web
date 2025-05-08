@@ -5,14 +5,16 @@ import { Input } from '@/components/ui/input';
 import { useToast } from '@/components/ui/use-toast';
 import { Link, useNavigate } from 'react-router-dom';
 import WinterLandscape from '@/components/WinterLandscape';
+import { InputOTP, InputOTPGroup, InputOTPSlot } from '@/components/ui/input-otp';
 
 const ForgotPassword = () => {
   const [email, setEmail] = useState('');
-  const [submitted, setSubmitted] = useState(false);
+  const [step, setStep] = useState<'email' | 'otp'>('email');
+  const [otp, setOtp] = useState('');
   const { toast } = useToast();
   const navigate = useNavigate();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmitEmail = (e: React.FormEvent) => {
     e.preventDefault();
     
     // Basic validation
@@ -25,15 +27,34 @@ const ForgotPassword = () => {
       return;
     }
     
-    // Show success message and navigate to login page
+    // Show success message and move to OTP verification
     toast({
       title: "Reset Link Sent",
-      description: "A password reset link has been sent to your email.",
+      description: "A verification code has been sent to your email.",
     });
     
-    setSubmitted(true);
+    // Proceed to OTP verification step
+    setStep('otp');
+  };
+
+  const handleVerifyOTP = (e: React.FormEvent) => {
+    e.preventDefault();
     
-    // Navigate back to login after a short delay
+    if (otp.length < 6) {
+      toast({
+        title: "Error",
+        description: "Please enter the complete 6-digit code",
+        variant: "destructive",
+      });
+      return;
+    }
+    
+    toast({
+      title: "OTP Verified",
+      description: "Your password has been reset successfully.",
+    });
+    
+    // Navigate back to login after successful verification
     setTimeout(() => {
       navigate('/');
     }, 1500);
@@ -41,10 +62,10 @@ const ForgotPassword = () => {
 
   return (
     <div className="flex min-h-screen w-full">
-      {/* Left side - Login form */}
+      {/* Left side - Form */}
       <div className="w-full md:w-1/2 flex items-center justify-center p-8 bg-white">
         <div className="w-full max-w-md">
-          {!submitted ? (
+          {step === 'email' ? (
             <>
               <div className="text-center mb-8">
                 <div className="mb-6">
@@ -71,7 +92,7 @@ const ForgotPassword = () => {
                 <p className="text-gray-500 mt-2">Enter your email to receive a reset link</p>
               </div>
               
-              <form onSubmit={handleSubmit}>
+              <form onSubmit={handleSubmitEmail}>
                 <div className="space-y-4">
                   <div className="space-y-2">
                     <label htmlFor="email" className="block text-sm font-medium">
@@ -97,27 +118,69 @@ const ForgotPassword = () => {
               </form>
             </>
           ) : (
-            <div className="text-center">
-              <svg 
-                xmlns="http://www.w3.org/2000/svg" 
-                className="h-16 w-16 mx-auto text-green-500 mb-4" 
-                viewBox="0 0 20 20" 
-                fill="currentColor"
-              >
-                <path 
-                  fillRule="evenodd" 
-                  d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" 
-                  clipRule="evenodd" 
-                />
-              </svg>
-              <h2 className="text-2xl font-bold mb-2">Check Your Email</h2>
-              <p className="text-gray-500 mb-6">
-                We've sent a password reset link to {email}
-              </p>
-              <p className="text-sm text-gray-500">
-                Redirecting to login page...
-              </p>
-            </div>
+            <>
+              <div className="text-center mb-8">
+                <div className="mb-6">
+                  <div className="mx-auto w-32 h-32 relative">
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <svg 
+                        xmlns="http://www.w3.org/2000/svg" 
+                        viewBox="0 0 24 24" 
+                        className="h-20 w-20 text-blue-500"
+                        fill="none" 
+                        stroke="currentColor" 
+                        strokeWidth="1.5" 
+                        strokeLinecap="round" 
+                        strokeLinejoin="round"
+                      >
+                        <path d="M19 11H5C3.89543 11 3 11.8954 3 13V19C3 20.1046 3.89543 21 5 21H19C20.1046 21 21 20.1046 21 19V13C21 11.8954 20.1046 11 19 11Z" />
+                        <path d="M7 11V7C7 5.67392 7.52678 4.40215 8.46447 3.46447C9.40215 2.52678 10.6739 2 12 2C13.3261 2 14.5979 2.52678 15.5355 3.46447C16.4732 4.40215 17 5.67392 17 7V11" />
+                      </svg>
+                    </div>
+                    <div className="absolute inset-0 rounded-full bg-blue-100 opacity-50"></div>
+                  </div>
+                </div>
+                <h1 className="text-3xl font-bold tracking-tight">ENTER OTP</h1>
+                <p className="text-gray-500 mt-2">
+                  Enter the verification code sent to <span className="font-medium">{email}</span>
+                </p>
+              </div>
+              
+              <form onSubmit={handleVerifyOTP} className="space-y-6">
+                <div className="flex justify-center">
+                  <InputOTP maxLength={6} value={otp} onChange={setOtp}>
+                    <InputOTPGroup>
+                      {Array.from({ length: 6 }).map((_, index) => (
+                        <InputOTPSlot key={index} index={index} className="w-10 h-12" />
+                      ))}
+                    </InputOTPGroup>
+                  </InputOTP>
+                </div>
+                
+                <Button 
+                  type="submit"
+                  className="w-full py-3 bg-purple-600 hover:bg-purple-700 text-white"
+                >
+                  Verify OTP
+                </Button>
+                
+                <div className="text-center">
+                  <p className="text-sm text-gray-500">
+                    Didn't receive the code?{" "}
+                    <button 
+                      type="button" 
+                      onClick={() => toast({
+                        title: "Resent OTP",
+                        description: "A new verification code has been sent to your email."
+                      })}
+                      className="text-purple-600 font-medium hover:underline"
+                    >
+                      Resend
+                    </button>
+                  </p>
+                </div>
+              </form>
+            </>
           )}
           
           <p className="mt-6 text-center text-sm text-gray-500">
