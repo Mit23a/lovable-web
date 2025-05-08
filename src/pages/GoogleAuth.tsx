@@ -28,13 +28,7 @@ const GoogleAuth = () => {
   const handleAccountSelect = (accountId: string) => {
     setSelectedAccount(accountId);
     // In a real app, this would authenticate with the selected account
-    setTimeout(() => {
-      navigate('/otp-verification', { 
-        state: { 
-          email: accounts.find(acc => acc.id === accountId)?.email 
-        } 
-      });
-    }, 1000);
+    navigate('/');
   };
 
   const handleUseAnotherAccount = () => {
@@ -59,7 +53,7 @@ const GoogleAuth = () => {
         
         <div className="border-t border-gray-200 my-8"></div>
         
-        <div className="mb-5">
+        <div className="mb-5 text-left">
           <h1 className="text-2xl font-medium mb-1">Choose an account</h1>
           <p className="text-gray-600">to continue to Company</p>
         </div>
@@ -71,14 +65,16 @@ const GoogleAuth = () => {
               className="flex items-center w-full p-3 text-left rounded-lg hover:bg-gray-50 transition-colors"
               onClick={() => handleAccountSelect(account.id)}
             >
-              <div className="mr-4">
-                <Avatar className="w-10 h-10 bg-purple-600 text-white">
-                  <AvatarFallback>{account.avatar}</AvatarFallback>
-                </Avatar>
-              </div>
-              <div>
-                <div className="font-medium">{account.name}</div>
-                <div className="text-gray-500 text-sm">{account.email}</div>
+              <div className="flex justify-between items-center w-full">
+                <div>
+                  <div className="font-medium">{account.name}</div>
+                  <div className="text-gray-500 text-sm">{account.email}</div>
+                </div>
+                <div>
+                  <Avatar className="w-10 h-10 bg-purple-500 text-white">
+                    <AvatarFallback>{account.avatar}</AvatarFallback>
+                  </Avatar>
+                </div>
               </div>
             </button>
           ))}
@@ -87,14 +83,16 @@ const GoogleAuth = () => {
             onClick={handleUseAnotherAccount}
             className="flex items-center w-full p-3 text-left rounded-lg hover:bg-gray-50 transition-colors"
           >
-            <div className="mr-4">
-              <div className="w-10 h-10 rounded-full border border-gray-300 flex items-center justify-center">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M12 4.5C7 4.5 2.73 7.61 1 12C2.73 16.39 7 19.5 12 19.5C17 19.5 21.27 16.39 23 12C21.27 7.61 17 4.5 12 4.5ZM12 17C9.24 17 7 14.76 7 12C7 9.24 9.24 7 12 7C14.76 7 17 9.24 17 12C17 14.76 14.76 17 12 17ZM12 9C10.34 9 9 10.34 9 12C9 13.66 10.34 15 12 15C13.66 15 15 13.66 15 12C15 10.34 13.66 9 12 9Z" fill="#5F6368"/>
-                </svg>
+            <div className="flex justify-between items-center w-full">
+              <div className="font-medium text-gray-700">Use another account</div>
+              <div>
+                <div className="w-10 h-10 rounded-full border border-gray-300 flex items-center justify-center">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 4.5C7 4.5 2.73 7.61 1 12C2.73 16.39 7 19.5 12 19.5C17 19.5 21.27 16.39 23 12C21.27 7.61 17 4.5 12 4.5ZM12 17C9.24 17 7 14.76 7 12C7 9.24 9.24 7 12 7C14.76 7 17 9.24 17 12C17 14.76 14.76 17 12 17ZM12 9C10.34 9 9 10.34 9 12C9 13.66 10.34 15 12 15C13.66 15 15 13.66 15 12C15 10.34 13.66 9 12 9Z" fill="#5F6368"/>
+                  </svg>
+                </div>
               </div>
             </div>
-            <div className="font-medium text-gray-700">Use another account</div>
           </button>
         </div>
         

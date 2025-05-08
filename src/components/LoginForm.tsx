@@ -107,7 +107,7 @@ const LoginForm = () => {
           
           <Button 
             type="submit" 
-            className="w-full bg-purple-600 hover:bg-purple-700 text-white"
+            className="w-full bg-blue-600 hover:bg-blue-700 text-white"
           >
             Sign in
           </Button>
@@ -142,7 +142,7 @@ const LoginForm = () => {
       
       <p className="mt-6 text-center text-sm text-gray-500">
         Don't have an account?{" "}
-        <Link to="/signup" className="text-purple-600 hover:text-purple-500 font-medium">
+        <Link to="/signup" className="text-red-600 hover:text-red-500 font-medium">
           Sign up for free!
         </Link>
       </p>

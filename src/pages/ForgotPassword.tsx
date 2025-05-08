@@ -25,18 +25,17 @@ const ForgotPassword = () => {
       return;
     }
     
-    // Instead of just showing a success message, we'll briefly show 
-    // the success UI and then navigate to OTP verification
+    // Show success message and navigate to login page
     toast({
-      title: "OTP Sent",
-      description: "A verification code has been sent to your email.",
+      title: "Reset Link Sent",
+      description: "A password reset link has been sent to your email.",
     });
     
     setSubmitted(true);
     
-    // Navigate to OTP verification after a short delay
+    // Navigate back to login after a short delay
     setTimeout(() => {
-      navigate('/otp-verification', { state: { email } });
+      navigate('/');
     }, 1500);
   };
 
@@ -48,8 +47,28 @@ const ForgotPassword = () => {
           {!submitted ? (
             <>
               <div className="text-center mb-8">
+                <div className="mb-6">
+                  <div className="mx-auto w-32 h-32 relative">
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <svg 
+                        xmlns="http://www.w3.org/2000/svg" 
+                        viewBox="0 0 24 24" 
+                        className="h-20 w-20 text-blue-500"
+                        fill="none" 
+                        stroke="currentColor" 
+                        strokeWidth="1.5" 
+                        strokeLinecap="round" 
+                        strokeLinejoin="round"
+                      >
+                        <rect width="16" height="13" x="4" y="5" rx="2" />
+                        <path d="m4 8 8 5 8-5" />
+                      </svg>
+                    </div>
+                    <div className="absolute inset-0 rounded-full bg-blue-100 opacity-50"></div>
+                  </div>
+                </div>
                 <h1 className="text-3xl font-bold tracking-tight">FORGOT PASSWORD</h1>
-                <p className="text-gray-500 mt-2">Enter your email to receive a verification code</p>
+                <p className="text-gray-500 mt-2">Enter your email to receive a reset link</p>
               </div>
               
               <form onSubmit={handleSubmit}>
@@ -72,7 +91,7 @@ const ForgotPassword = () => {
                     type="submit" 
                     className="w-full bg-purple-600 hover:bg-purple-700 text-white"
                   >
-                    Send Verification Code
+                    Send Reset Link
                   </Button>
                 </div>
               </form>
@@ -93,10 +112,10 @@ const ForgotPassword = () => {
               </svg>
               <h2 className="text-2xl font-bold mb-2">Check Your Email</h2>
               <p className="text-gray-500 mb-6">
-                We've sent a verification code to {email}
+                We've sent a password reset link to {email}
               </p>
               <p className="text-sm text-gray-500">
-                Redirecting to verification screen...
+                Redirecting to login page...
               </p>
             </div>
           )}
