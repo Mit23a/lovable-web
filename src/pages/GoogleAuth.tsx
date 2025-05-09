@@ -74,7 +74,7 @@ const GoogleAuth = () => {
                   <div className="font-medium">{account.name}</div>
                   <div className="text-gray-500">{account.email}</div>
                 </div>
-                <Avatar className="w-10 h-10 bg-purple-500 text-white">
+                <Avatar className="w-10 h-10 bg-pink-500 text-white">
                   <AvatarFallback className="text-white">{account.avatar}</AvatarFallback>
                 </Avatar>
               </Card>
