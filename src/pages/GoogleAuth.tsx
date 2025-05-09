@@ -67,28 +67,30 @@ const GoogleAuth = () => {
             {accounts.map((account) => (
               <Card 
                 key={account.id}
-                className="flex items-center justify-between w-full p-4 hover:bg-gray-50 transition-colors cursor-pointer border-gray-200"
+                className="flex items-center w-full p-4 hover:bg-gray-50 transition-colors cursor-pointer border-gray-200"
                 onClick={() => handleAccountSelect(account.id)}
               >
+                <Avatar className="w-12 h-12 bg-pink-500 text-white mr-3">
+                  <AvatarFallback className="text-white">{account.avatar}</AvatarFallback>
+                </Avatar>
                 <div>
                   <div className="font-medium">{account.name}</div>
                   <div className="text-gray-500">{account.email}</div>
                 </div>
-                <Avatar className="w-10 h-10 bg-pink-500 text-white">
-                  <AvatarFallback className="text-white">{account.avatar}</AvatarFallback>
-                </Avatar>
               </Card>
             ))}
             
-            <Card 
-              className="flex items-center justify-between w-full p-4 hover:bg-gray-50 transition-colors cursor-pointer border-gray-200"
-              onClick={handleUseAnotherAccount}
-            >
-              <div className="font-medium text-gray-700">Use another account</div>
-              <div className="w-10 h-10 rounded-full border border-gray-300 flex items-center justify-center">
-                <User size={20} className="text-gray-600" />
-              </div>
-            </Card>
+            <div className="border-t border-gray-200 pt-3">
+              <Card 
+                className="flex items-center w-full p-4 hover:bg-gray-50 transition-colors cursor-pointer border-gray-200"
+                onClick={handleUseAnotherAccount}
+              >
+                <div className="w-12 h-12 rounded-full border border-gray-300 flex items-center justify-center mr-3">
+                  <User size={20} className="text-gray-600" />
+                </div>
+                <div className="font-medium text-gray-700">Use another account</div>
+              </Card>
+            </div>
           </div>
         </div>
         
